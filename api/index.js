@@ -26,5 +26,22 @@ app.post(`/user`, async (req, res) => {
     res.json(result)
 })
 
+// index.js
+app.post('/post', async (req, res) => {
+    const {title, content, authorEmail} = req.body
+    const post = await prisma.post.create({
+        data: {
+            title,
+            content,
+            author: {
+                connectOrCreate: {
+                    email: authorEmail
+                }
+            }
+        }
+    })
+    res.status(200).json(post)
+})
+
 
 
