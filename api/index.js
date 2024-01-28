@@ -85,3 +85,13 @@ app.get('/feed', async (req, res) => {
     res.json(posts)
 })
 
+// index.js
+app.delete(`/post/:id`, async (req, res) => {
+    const {id} = req.params
+    const post = await prisma.post.delete({
+        where: {
+            id: parseInt(id),
+        },
+    })
+    res.json(post)
+})
