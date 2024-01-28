@@ -52,5 +52,17 @@ app.get('/drafts', async (req, res) => {
     res.json(posts)
 })
 
+// index.js
+app.get('/post/:id', async (req, res) => {
+    const {id} = req.params
+    const post = await prisma.post.findUnique({
+        where: {
+            id: Number(id),
+        },
+        include: {author: true}
+    })
+    res.json(post)
+})
+
 
 
