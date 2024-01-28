@@ -14,3 +14,17 @@ export default {
     path: '/api',
     handler: app
 }
+
+// index.js
+app.post(`/user`, async (req, res) => {
+    const result = await prisma.user.create({
+        data: {
+            email: req.body.email,
+            name: req.body.name,
+        },
+    })
+    res.json(result)
+})
+
+
+
