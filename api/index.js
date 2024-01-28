@@ -95,3 +95,25 @@ app.delete(`/post/:id`, async (req, res) => {
     })
     res.json(post)
 })
+
+// index.js
+app.get('/filterPosts', async (req, res) => {
+    const {searchString} = req.query
+    const draftPosts = await prisma.post.findMany({
+        where: {
+            OR: [
+                {
+                    title: {
+                        contains: searchString,
+                    },
+                },
+                {
+                    content: {
+                        contains: searchString,
+                    },
+                },
+            ],
+        },
+    })
+    res.send(draftPosts)
+})
