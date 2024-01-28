@@ -43,5 +43,14 @@ app.post('/post', async (req, res) => {
     res.status(200).json(post)
 })
 
+// index.js
+app.get('/drafts', async (req, res) => {
+    const posts = await prisma.post.findMany({
+        where: {published: false},
+        include: {author: true}
+    })
+    res.json(posts)
+})
+
 
 
