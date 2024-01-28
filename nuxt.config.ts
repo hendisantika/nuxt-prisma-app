@@ -2,3 +2,7 @@
 export default defineNuxtConfig({
     devtools: {enabled: true}
 })
+
+// serverMiddleware: [
+//     '~/api/index.js'
+// ]
