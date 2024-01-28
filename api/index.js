@@ -64,5 +64,16 @@ app.get('/post/:id', async (req, res) => {
     res.json(post)
 })
 
+// index.js
+app.put('/publish/:id', async (req, res) => {
+    const {id} = req.params
+    const post = await prisma.post.update({
+        where: {
+            id: Number(id),
+        },
+        data: {published: true},
+    })
+    res.json(post)
+})
 
 
